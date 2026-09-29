@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LMS Query Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Learning Management System</p>
+          <h1>LMS Query Chatbot</h1>
+        </div>
+      </header>
+
+      <main class="chat-panel">
+        <div id="chatMessages" class="chat-messages">
+          <div class="message bot">
+            Hello! I can help with your LMS questions. Ask about course schedules, assignments, grades, or login issues.
+          </div>
+        </div>
+
+        <form id="chatForm" class="chat-form">
+          <input
+            id="userInput"
+            type="text"
+            placeholder="Type your question here..."
+            autocomplete="off"
+            required
+          />
+          <button type="submit">Send</button>
+        </form>
+      </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>
