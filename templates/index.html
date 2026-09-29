@@ -12,13 +12,21 @@
         <div>
           <p class="eyebrow">Learning Management System</p>
           <h1>LMS Query Chatbot</h1>
+          <span class="status-badge">{{ llm_status }}</span>
         </div>
       </header>
 
       <main class="chat-panel">
+        <div class="quick-actions">
+          <button class="suggestion" type="button">Schedule for biology</button>
+          <button class="suggestion" type="button">Assignments for math</button>
+          <button class="suggestion" type="button">My grade in history</button>
+          <button class="suggestion" type="button">Forgot LMS password</button>
+        </div>
+
         <div id="chatMessages" class="chat-messages">
           <div class="message bot">
-            Hello! I can help with your LMS questions. Ask about course schedules, assignments, grades, or login issues.
+            Hello! I can help with your LMS questions, including schedules, assignments, grades, announcements, and login support.
           </div>
         </div>
 
@@ -26,7 +34,7 @@
           <input
             id="userInput"
             type="text"
-            placeholder="Type your question here..."
+            placeholder="Ask about your LMS..."
             autocomplete="off"
             required
           />

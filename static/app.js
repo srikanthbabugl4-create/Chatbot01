@@ -1,6 +1,7 @@
 const chatForm = document.getElementById('chatForm');
 const userInput = document.getElementById('userInput');
 const chatMessages = document.getElementById('chatMessages');
+const suggestionButtons = document.querySelectorAll('.suggestion');
 
 function addMessage(text, type) {
   const msg = document.createElement('div');
@@ -10,11 +11,8 @@ function addMessage(text, type) {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-chatForm.addEventListener('submit', async (event) => {
-  event.preventDefault();
-  const message = userInput.value.trim();
-
-  if (!message) return;
+async function sendMessage(message) {
+  if (!message.trim()) return;
 
   addMessage(message, 'user');
   userInput.value = '';
@@ -22,15 +20,26 @@ chatForm.addEventListener('submit', async (event) => {
   try {
     const response = await fetch('/api/chat', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message })
     });
 
     const data = await response.json();
     addMessage(data.reply, 'bot');
   } catch (error) {
-    addMessage('Sorry, something went wrong. Please try again.', 'bot');
+    addMessage('Sorry, the chatbot is unavailable right now. Please try again.', 'bot');
   }
+}
+
+chatForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  await sendMessage(userInput.value);
+});
+
+suggestionButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const text = button.textContent.trim();
+    userInput.value = text;
+    userInput.focus();
+  });
 });

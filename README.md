@@ -1,20 +1,16 @@
 # LMS Query Chatbot
 
-This project is a simple chatbot for handling LMS-related questions. It supports common student support queries such as:
-
-- Course schedules and instructor information
-- Assignment and deadline tracking
-- Grades and performance summaries
-- Announcements and updates
-- Password and login help
-- General LMS support questions
+This project is an upgraded chatbot for handling LMS-related questions and support requests. It includes a web-based chat interface, rule-based support logic, and optional integration with OpenAI for more natural responses.
 
 ## Features
 
-- Clean web interface
-- Fast backend chatbot logic
-- Starter knowledge base for LMS support
-- Easy to extend with real LLM or database integration
+- Course schedule and instructor lookup
+- Assignment and deadline tracking
+- Grade summaries
+- Announcements and updates
+- LMS login and password assistance
+- Optional AI-powered responses using OpenAI
+- Session-based conversation memory
 
 ## Run locally
 
@@ -29,12 +25,18 @@ This project is a simple chatbot for handling LMS-related questions. It supports
    pip install -r requirements.txt
    ```
 
-3. Start the app
+3. Configure environment variables
+   ```bash
+   cp .env.example .env
+   ```
+   Then set `OPENAI_API_KEY` if you want AI responses.
+
+4. Start the app
    ```bash
    python app.py
    ```
 
-4. Open your browser at:
+5. Open your browser:
    ```text
    http://127.0.0.1:5000
    ```
@@ -42,15 +44,35 @@ This project is a simple chatbot for handling LMS-related questions. It supports
 ## Example prompts
 
 - What is the schedule for biology?
-- What assignments are due for math?
-- Show my grades for history.
+- Show me the assignments due for math.
+- How is my grade in history?
 - I forgot my LMS password.
-- What is the latest announcement for math?
+- What was the latest announcement for biology?
 
-## Next upgrade ideas
+## Optional AI setup
 
-- Connect to a real LLM like OpenAI, Azure OpenAI, or Gemini
+Add the following to `.env`:
+
+```env
+OPENAI_API_KEY=your_key_here
+OPENAI_MODEL=gpt-4o-mini
+SECRET_KEY=your_secret_key
+```
+
+If no API key is set, the app runs in demo mode using built-in LMS logic.
+
+## Project structure
+
+- `app.py` — Flask backend and chatbot logic
+- `lms_data.py` — LMS knowledge base
+- `templates/index.html` — chat UI
+- `static/styles.css` — styling
+- `static/app.js` — frontend interaction logic
+
+## Future enhancements
+
 - Add authentication for students and faculty
-- Store course and assignment data in a database
-- Add chat history and admin dashboard
-- Integrate with Moodle, Canvas, Blackboard, or custom LMS APIs
+- Connect to real LMS APIs such as Moodle or Canvas
+- Store conversations in a database
+- Add analytics and admin dashboards
+- Build multilingual support
